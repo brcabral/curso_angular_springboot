@@ -9,7 +9,10 @@ import { Cliente } from '../cliente';
 export class ClientesFormComponent implements OnInit {
   cliente: Cliente;
 
-  constructor() { }
+  constructor() {
+    this.cliente = new Cliente();
+    this.cliente.nome = 'Breno';
+   }
 
   ngOnInit(): void {
   }
