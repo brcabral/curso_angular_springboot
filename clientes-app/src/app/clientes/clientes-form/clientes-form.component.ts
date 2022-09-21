@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { ClientesService } from 'src/app/clientes.service';
 import { Cliente } from '../cliente';
@@ -10,17 +11,26 @@ import { Cliente } from '../cliente';
   styleUrls: ['./clientes-form.component.css']
 })
 export class ClientesFormComponent implements OnInit {
+  id: number;
   cliente: Cliente;
   success: boolean = false;
   errors: String[];
 
   constructor(
     private service: ClientesService,
-    private router: Router) {
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
       this.cliente = new Cliente();
    }
 
   ngOnInit(): void {
+    let params = this.activatedRoute.params;
+    if (params && params.value && params.value.id) {
+      this.id = params.value.id;
+      this.service.getClienteById(this.id).subscribe(
+        response => this.cliente = response,
+        errorResponse => this.cliente = new Cliente());
+    }
   }
 
   onSubmit() {
