@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Params, Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { ClientesService } from 'src/app/clientes.service';
 import { Cliente } from '../cliente';
@@ -24,13 +25,15 @@ export class ClientesFormComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    let params = this.activatedRoute.params;
-    if (params && params.value && params.value.id) {
-      this.id = params.value.id;
-      this.service.getClienteById(this.id).subscribe(
-        response => this.cliente = response,
-        errorResponse => this.cliente = new Cliente());
-    }
+    let params: Observable<Params> = this.activatedRoute.params;
+    params.subscribe(urlParams => {
+      this.id = urlParams['id'];
+      if (this.id) {
+        this.service.getClienteById(this.id).subscribe(
+          response => this.cliente = response,
+          errorResponse => this.cliente = new Cliente())
+      }
+    });
   }
 
   onSubmit() {
@@ -40,7 +43,7 @@ export class ClientesFormComponent implements OnInit {
         this.errors = null;
       }, errorResponse => {
         this.success = false;
-        this.errors = ['Erro ao atualizar o cliente.']
+        this.errors = errorResponse.error.errors;
       });
     } else {
       this.service.salvar(this.cliente).subscribe(response => {
