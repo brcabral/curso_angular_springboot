@@ -1,5 +1,6 @@
 package com.github.brcabral.clientes.model.entity;
 
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
