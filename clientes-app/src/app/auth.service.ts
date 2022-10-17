@@ -32,4 +32,8 @@ export class AuthService {
 
     return this.http.post(this.tokenUrl, params.toString(), { headers });
   }
+
+  isAuthenticated(): boolean {
+    return false;
+  }
 }
