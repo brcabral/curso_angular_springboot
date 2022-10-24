@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button'
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +19,8 @@ import { ContatoService } from './contato.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatToolbarModule,
+    MatInputModule,
     MatButtonModule,
     BrowserAnimationsModule
   ],
