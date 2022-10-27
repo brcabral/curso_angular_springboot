@@ -10,6 +10,7 @@ import { Contato } from './contato';
 })
 export class ContatoComponent implements OnInit {
   formulario : FormGroup;
+  contatos: Contato[] = [];
 
   constructor(
     private service: ContatoService,
@@ -24,20 +25,12 @@ export class ContatoComponent implements OnInit {
   }
 
   submit() {
-    const errorNomeRequired = this.formulario.controls.nome.errors.required;
-    const errorEmailRequired = this.formulario.controls.email.errors.required;
-    const errorEmailInvalido = this.formulario.controls.email.errors.email;
-    
-    console.log('errorNomeRequired: ', errorNomeRequired);
-    console.log('errorEmailRequired: ', errorEmailRequired);
-    console.log('errorEmailInvalido: ', errorEmailInvalido);
+    const formValues = this.formulario.value;
+    const contato: Contato = new Contato(formValues.nome, formValues.email);
 
-    console.log(this.formulario.value);
-    const isValid = this.formulario.valid;
-    console.log('is valid: ', isValid);
-
-    //this.service.save(contato).subscribe(resposta => {
-    //  console.log(resposta);
-    //});
+    this.service.save(contato).subscribe(resposta => {
+      this.contatos.push(resposta);
+      console.log(resposta);
+    });
   }
 }
