@@ -11,6 +11,7 @@ import { Contato } from './contato';
 export class ContatoComponent implements OnInit {
   formulario : FormGroup;
   contatos: Contato[] = [];
+  colunas = ['id', 'nome', 'email', 'favorito'];
 
   constructor(
     private service: ContatoService,
