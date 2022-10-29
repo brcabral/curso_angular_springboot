@@ -45,4 +45,10 @@ export class ContatoComponent implements OnInit {
       this.contatos = response;
     });
   }
+
+  favoritar(contato: Contato) {
+    this.service.favorite(contato).subscribe(response => {
+      contato.favorito = !contato.favorito;
+    });
+  }
 }
