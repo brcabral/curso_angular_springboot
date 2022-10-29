@@ -9,6 +9,6 @@ insert into contato (nome, email, favorito)
 	values ('Sandra Isabela Sales', 'sandraisabelasales@outershoes.com.br', true);
 
 alter table contato 
-	add column foto byte
+	add column foto oid;
 
 select * from contato c;

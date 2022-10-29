@@ -56,6 +56,7 @@ public class ContatoController {
                 byte[] bytes = new byte[(int) arquivo.getSize()];
                 IOUtils.readFully(is, bytes);
                 c.setFoto(bytes);
+                repository.save(c);
                 is.close();
                 return bytes;
             } catch (IOException e) {
