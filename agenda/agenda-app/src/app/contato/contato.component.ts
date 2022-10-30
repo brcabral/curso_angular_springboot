@@ -57,11 +57,8 @@ export class ContatoComponent implements OnInit {
     if(files) {
       const foto = files[0];
       const formData: FormData = new FormData();
-      console.log(foto);
       formData.append("foto", foto);
-      console.log("ponto 01.01");
       this.service.upload(contato, formData).subscribe(response => {
-        console.log("ponto 01.02");
         this.listarContatos();
       });
     }

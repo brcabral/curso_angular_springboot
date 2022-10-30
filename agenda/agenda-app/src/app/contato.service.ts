@@ -29,8 +29,6 @@ export class ContatoService {
   }
 
   upload(contato: Contato, formData: FormData): Observable<any> {
-    console.log("ponto 02.01");
-    return this.http.put(`${this.url}/${contato.id}/foto`, formData);
-    console.log("ponto 02.02");
+    return this.http.put(`${this.url}/${contato.id}/foto`, formData, { responseType: 'blob' });
   }
 }
